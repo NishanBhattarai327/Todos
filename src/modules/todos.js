@@ -10,11 +10,19 @@ const todoList = (function() {
 			dueDate = input.dueDate, priority = input.priority, 
 			notes = input.notes || '', checklist = input.checklist || '';
 
-		list.push({title, description, dueDate, priority, notes, checklist});
+		let index = list.length;
+
+		list.push({title, description, dueDate, priority, notes, checklist, index});
 	}
 
 	function deleteTodo(index) {
-		return list.splice(index, 1).length !== 0 ? true : false;
+		let todoIndex;
+		list.filter((prop, i) => {
+			if (prop.index === index) todoIndex = i;
+			// console.log({prop, i});
+		});
+
+		return list.splice(todoIndex, 1).length !== 0 ? true : false;
 	}
 
 	function updateTodo(index, input) {
