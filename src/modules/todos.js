@@ -17,9 +17,9 @@ const todoList = (function() {
 
 	function deleteTodo(index) {
 		let todoIndex;
-		list.filter((prop, i) => {
-			if (prop.index === index) todoIndex = i;
-			// console.log({prop, i});
+		list.filter((todo, i) => {
+			if (todo.index === index) todoIndex = i;
+			// console.log({todo, i});
 		});
 
 		return list.splice(todoIndex, 1).length !== 0 ? true : false;
