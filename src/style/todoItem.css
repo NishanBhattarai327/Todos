@@ -1,0 +1,10 @@
+.todo-item {
+	border: 2px dotted pink;
+	padding: 20px;
+	margin: 5px;
+}
+
+.todo-item .todo-item-content {
+	color: darkred;
+	display: grid;
+}

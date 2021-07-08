@@ -10,7 +10,7 @@ todoList.updateTodo(1, {title: 'Wash tie'});
 todoList.deleteTodo(2);
 
 ui_todo.glueBackend(todoList);
-ui_todo.createTodoList(todoList.getTodoList());
+ui_todo.displayTodoList(todoList.getTodoList());
 
 
 

@@ -5,14 +5,18 @@ const todoList = (function() {
 		return list;
 	}
 
+	function getTodoItem(index) {
+		return list[index];
+	}
+
 	function addTodo(input) {
 		let title = input.title, description = input.description || '',
 			dueDate = input.dueDate, priority = input.priority, 
-			notes = input.notes || '', checklist = input.checklist || '';
+			completed = input.completed || false;
 
 		let index = list.length;
 
-		list.push({title, description, dueDate, priority, notes, checklist, index});
+		list.push({title, description, dueDate, priority, completed, index});
 	}
 
 	function deleteTodo(index) {
@@ -29,7 +33,7 @@ const todoList = (function() {
 		list[index] = Object.assign(list[index], input);
 	}
 
-	return { getTodoList, addTodo, deleteTodo, updateTodo, };
+	return { getTodoList, getTodoItem, addTodo, deleteTodo, updateTodo, };
 
 })();
 
