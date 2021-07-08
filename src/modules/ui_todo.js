@@ -3,10 +3,10 @@ import '../style/todoItem.css';
 
 const ui = (function() {
 	const domBody = document.querySelector('.content');
-	let _todoList;
+	let PubSub;
 
-	function glueBackend(todoList) {
-		_todoList = todoList;
+	function gluePubSub(pubSub) {
+		PubSub = pubSub;
 	}
 
 	function glueUiBody(body) {
@@ -73,7 +73,7 @@ const ui = (function() {
 	function removeTodo(event, todoData) {
 		let parent = event.target.parentNode.parentNode;
 		parent.removeChild(event.target.parentNode);
-		_todoList.deleteTodo(todoData.id);
+		PubSub.emit(PubSub.eventCODE.DELETE_TODO, todoData.id);
 	}
 
 	function handleEditClicked(event, todoData) {
@@ -81,12 +81,18 @@ const ui = (function() {
 	}
 
 	function editTodo(event, todoData) {
-		_todoList.updateTodo(todoData.id, {title: 'Eat rice', priority: 'low', description:'dal-bhat'});
-		let domTodoContent = event.target.parentNode.querySelector('.todo-item-content');
-		domTodoContent.innerHTML = todoHtml(_todoList.getTodoItem(todoData.id));
+		PubSub.emit(
+			PubSub.eventCODE.UPDATE_TODO, 
+			todoData.id, 
+			{title: 'Eat rice', priority: 'low', description:'dal-bhat'}
+		);
+		let updatedData = PubSub.emit(PubSub.eventCODE.GET_TODO_ITEM, todoData.id);
+
+		event.target.parentNode.querySelector('.todo-item-content')
+		.innerHTML = todoHtml(updatedData);
 	}
 
-	return { displayTodoList, glueBackend, glueUiBody };
+	return { displayTodoList, gluePubSub, glueUiBody };
 })();
 
 export { ui };
