@@ -66,6 +66,80 @@ const ui = (function() {
 		`;
 	}
 
+	function createForm(parent, data) {
+		const form = document.createElement('form');
+		form.classList.add('todo-edit-form');
+		form.innerHTML = `
+			<label for='title'>Title</label>
+			<input type='text' name='title' id='title'> <br>
+
+			<label for='description'>Description</label>
+			<textarea name='description' id='description'  rows="4" cols="50">
+				Write the Description
+			</textarea>
+			<br>
+
+			<label for='due-date'>Due Date</label>
+			<input type='date' name='due-date' id='due-date'> <br>
+
+			<label for='priority'>Priority</label>
+			<input type='text' name='priority' id='priority'> <br>
+
+			<input type='submit' value='Add Todo' class='btn'>
+		`;
+
+		let popup = popupWindow(parent);
+		popup.querySelector('.pop-up-content').append(form);
+
+		const btnCancel = document.createElement('button');
+		btnCancel.textContent = 'cancel';
+		btnCancel.classList.add('btn', 'cancel');
+		btnCancel.addEventListener('click', (e) => {
+			e.preventDefault();
+			removePopup(parent, popup)
+		});
+
+		form.append(btnCancel);
+
+		form.addEventListener('submit', (e) => {
+			e.preventDefault();
+			console.log('form submited');
+		});
+	}
+
+	function popupWindow(parent) {
+		const popup = document.createElement('div');
+		popup.classList.add('pop-up-window');
+
+		const content = document.createElement('div');
+		content.classList.add('pop-up-content');
+
+		const closePopup = document.createElement('span');
+		closePopup.classList.add('pop-up-content-close');
+		closePopup.innerHTML = '&times;';
+		content.append(closePopup);
+
+		popup.append(content);
+		parent.append(popup);
+
+		// When the user clicks on <span> (x), close popup
+		closePopup.addEventListener('click', (e) => {
+			removePopup(parent, popup);
+		});
+		// When the user clicks anywhere outside of the popup, close it
+		window.addEventListener('click', (event) => {
+		  if (event.target == popup) {
+		    removePopup(parent, popup);
+		  }
+		});
+
+		return popup;
+	}
+
+	function removePopup(parent, popup) {
+		parent.removeChild(popup);
+	}	
+
 	function redrawTodo(parent, dataId){
 		let data = PubSub.emit(PubSub.eventCODE.GET_TODO_ITEM, dataId);
 		parent.querySelector('.todo-item-content').innerHTML = todoHtml(data);
@@ -86,6 +160,7 @@ const ui = (function() {
 	}
 
 	function handleEditClicked(event, todoData) {
+		createForm(domBody, todoData);
 		editTodo(event.target.parentNode, todoData);
 	}
 
