@@ -5,32 +5,34 @@ const todoList = (function() {
 		return list;
 	}
 
-	function getTodoItem(index) {
-		return list[index];
+	function getTodoItem(id) {
+		return list[getIndex(id)];
 	}
 
 	function addTodo(input) {
 		let title = input.title, description = input.description || '',
 			dueDate = input.dueDate, priority = input.priority, 
 			completed = input.completed || false;
+		let id = list.length;
 
-		let index = list.length;
-
-		list.push({title, description, dueDate, priority, completed, index});
+		list.push({title, description, dueDate, priority, completed, id});
 	}
 
-	function deleteTodo(index) {
-		let todoIndex;
-		list.filter((todo, i) => {
-			if (todo.index === index) todoIndex = i;
-			// console.log({todo, i});
-		});
-
-		return list.splice(todoIndex, 1).length !== 0 ? true : false;
+	function deleteTodo(id) {
+		return list.splice(getIndex(id), 1).length !== 0 ? true : false;
 	}
 
-	function updateTodo(index, input) {
+	function updateTodo(id, input) {
+		let index = getIndex(id);
 		list[index] = Object.assign(list[index], input);
+	}
+
+	function getIndex(id) {
+		let index;
+		list.filter((todo, i) => {
+			if (todo.id === id) index = i;
+		});
+		return index;
 	}
 
 	return { getTodoList, getTodoItem, addTodo, deleteTodo, updateTodo, };

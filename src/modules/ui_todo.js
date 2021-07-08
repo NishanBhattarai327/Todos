@@ -73,7 +73,7 @@ const ui = (function() {
 	function removeTodo(event, todoData) {
 		let parent = event.target.parentNode.parentNode;
 		parent.removeChild(event.target.parentNode);
-		_todoList.deleteTodo(todoData.index);
+		_todoList.deleteTodo(todoData.id);
 	}
 
 	function handleEditClicked(event, todoData) {
@@ -81,9 +81,9 @@ const ui = (function() {
 	}
 
 	function editTodo(event, todoData) {
-		_todoList.updateTodo(todoData.index, {title: 'Eat rice', priority: 'low', description:'dal-bhat'});
+		_todoList.updateTodo(todoData.id, {title: 'Eat rice', priority: 'low', description:'dal-bhat'});
 		let domTodoContent = event.target.parentNode.querySelector('.todo-item-content');
-		domTodoContent.innerHTML = todoHtml(_todoList.getTodoItem(todoData.index));
+		domTodoContent.innerHTML = todoHtml(_todoList.getTodoItem(todoData.id));
 	}
 
 	return { displayTodoList, glueBackend, glueUiBody };
