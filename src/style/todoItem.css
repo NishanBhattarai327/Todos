@@ -4,7 +4,11 @@
 	margin: 5px;
 }
 
-.todo-item .todo-item-content {
+.todo-item-content {
 	color: darkred;
 	display: grid;
+}
+
+.status-finished {
+	text-decoration: line-through;
 }

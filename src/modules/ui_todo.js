@@ -41,8 +41,8 @@ const ui = (function() {
 		domTodoItem.append(domBtnRemoveTodo);
 		domTodoItem.append(domBtnEditTodo);
 
-		domBtnTodoStatus.addEventListener('click', (e) => handleStatusClicked(e, todoData));
 		domBtnTodoStatus.textContent = todoData.completed ? 'finished' : 'unfinished';
+		domBtnTodoStatus.addEventListener('click', (e) => handleStatusClicked(e.target, todoData));
 
 		domBtnRemoveTodo.addEventListener('click', (e) => removeTodo(e, todoData));
 		domBtnRemoveTodo.textContent = 'Remove';
@@ -59,15 +59,24 @@ const ui = (function() {
 			status = 'finished';
 		}
 		return `
-			<span class='todo-title todo-status-${status}'>${todoData.title}</span> 
-			<span class='todo-description todo-status-${status}'>${todoData.description}</span>
-			<span class='todo-priority todo-status-${status}'>priority: ${todoData.priority}</span>
-			<span class='todo-due-date todo-status-${status}'>due-date: ${todoData.dueDate}</span>
+			<span class='todo-title status-${status}'>${todoData.title}</span> 
+			<span class='todo-description status-${status}'>${todoData.description}</span>
+			<span class='todo-priority status-${status}'>priority: ${todoData.priority}</span>
+			<span class='todo-due-date status-${status}'>due-date: ${todoData.dueDate}</span>
 		`;
 	}
 
-	function handleStatusClicked(e, todoData) {
-		console.log('status clicked');
+	function redrawTodo(parent, dataId){
+		let data = PubSub.emit(PubSub.eventCODE.GET_TODO_ITEM, dataId);
+		parent.querySelector('.todo-item-content').innerHTML = todoHtml(data);
+	}
+
+	function handleStatusClicked(btn, todoData) {
+		btn.textContent = btn.textContent === 'finished' ? 'unfinished' : 'finished';
+		let completed = btn.textContent === 'finished' ? true : false;
+
+		PubSub.emit(PubSub.eventCODE.UPDATE_TODO, todoData.id, {completed});
+		redrawTodo(btn.parentNode, todoData.id);
 	}
 
 	function removeTodo(event, todoData) {
@@ -77,20 +86,18 @@ const ui = (function() {
 	}
 
 	function handleEditClicked(event, todoData) {
-		editTodo(event, todoData);
+		editTodo(event.target.parentNode, todoData);
 	}
 
-	function editTodo(event, todoData) {
+	function editTodo(parentNode, todoData) {
 		PubSub.emit(
 			PubSub.eventCODE.UPDATE_TODO, 
 			todoData.id, 
 			{title: 'Eat rice', priority: 'low', description:'dal-bhat'}
 		);
-		let updatedData = PubSub.emit(PubSub.eventCODE.GET_TODO_ITEM, todoData.id);
-
-		event.target.parentNode.querySelector('.todo-item-content')
-		.innerHTML = todoHtml(updatedData);
+		redrawTodo(parentNode, todoData.id);
 	}
+
 
 	return { displayTodoList, gluePubSub, glueUiBody };
 })();
