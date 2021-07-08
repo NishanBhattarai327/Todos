@@ -71,19 +71,17 @@ const ui = (function() {
 		form.classList.add('todo-edit-form');
 		form.innerHTML = `
 			<label for='title'>Title</label>
-			<input type='text' name='title' id='title'> <br>
+			<input type='text' name='title' id='title' value='${data.title}'> <br>
 
 			<label for='description'>Description</label>
-			<textarea name='description' id='description'  rows="4" cols="50">
-				Write the Description
-			</textarea>
+			<textarea name='description' id='description'  rows="4" cols="50">${data.description}</textarea>
 			<br>
 
 			<label for='due-date'>Due Date</label>
-			<input type='date' name='due-date' id='due-date'> <br>
+			<input type='date' name='due-date' id='due-date' value='${data.dueDate}'> <br>
 
 			<label for='priority'>Priority</label>
-			<input type='text' name='priority' id='priority'> <br>
+			<input type='text' name='priority' id='priority' value='${data.priority}'> <br>
 
 			<input type='submit' value='Add Todo' class='btn'>
 		`;

@@ -7,9 +7,9 @@ PubSub.subscribe(PubSub.eventCODE.UPDATE_TODO, todoList.updateTodo);
 PubSub.subscribe(PubSub.eventCODE.DELETE_TODO, todoList.deleteTodo);
 PubSub.subscribe(PubSub.eventCODE.GET_TODO_ITEM, todoList.getTodoItem);
 
-todoList.addTodo({title: 'Washing Cloth', description: 'school dress', dueDate: '2077/04/03', priority: 'high'});
-todoList.addTodo({title: 'Washing Cloth', description: 'school dress', dueDate: '2077/04/03', priority: 'high'});
-todoList.addTodo({title: 'Washing Cloth', description: 'school dress', dueDate: '2077/04/03', priority: 'high'});
+todoList.addTodo({title: 'Washing Cloth', description: 'school dress', dueDate: '2018-07-22', priority: 'high'});
+todoList.addTodo({title: 'Washing Cloth', description: 'school dress', dueDate: '2018-07-22', priority: 'high'});
+todoList.addTodo({title: 'Washing Cloth', description: 'school dress', dueDate: '2018-07-22', priority: 'high'});
 
 todoList.updateTodo(1, {title: 'Wash tie'});
 todoList.deleteTodo(2);
