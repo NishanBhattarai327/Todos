@@ -71,19 +71,24 @@ const ui = (function() {
 		form.classList.add('todo-edit-form');
 		form.innerHTML = `
 			<label for='title'>Title</label>
-			<input type='text' name='title' id='title' value='${data.title}'> <br>
+			<input type='text' name='title' id='title' class='field title' value='${data.title}'> <br>
 
 			<label for='description'>Description</label>
-			<textarea name='description' id='description'  rows="4" cols="50">${data.description}</textarea>
+			<textarea name='description' id='description' class='field description' rows="4" cols="50">${data.description}</textarea>
 			<br>
 
 			<label for='due-date'>Due Date</label>
-			<input type='date' name='due-date' id='due-date' value='${data.dueDate}'> <br>
+			<input type='date' name='due-date' id='due-date' class='field due-date' value='${data.dueDate}'> <br>
 
 			<label for='priority'>Priority</label>
-			<input type='text' name='priority' id='priority' value='${data.priority}'> <br>
+			<select name="priority" id='priority' class='field priority'>
+			    <option value="high">high</option>
+			    <option value="midium">Medium</option>
+			    <option value="low">low</option>
+			</select>
+			<br>
 
-			<input type='submit' value='Add Todo' class='btn'>
+			<input type='submit' value='Add Todo' class='btn submit'>
 		`;
 
 		let popup = popupWindow(parent);
