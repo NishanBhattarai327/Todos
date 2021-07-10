@@ -46,9 +46,11 @@ const ui = (function() {
 		domBtnTodoStatus.addEventListener('click', (e) => handleStatusClicked(e.target, todoData));
 
 		domBtnRemoveTodo.addEventListener('click', (e) => removeTodo(e, todoData));
+		domBtnRemoveTodo.classList.add('todo-remove-btn');
 		domBtnRemoveTodo.textContent = 'Remove';
 
 		domBtnEditTodo.addEventListener('click', (e) => handleEditClicked(e, todoData));
+		domBtnEditTodo.classList.add('todo-edit-btn');
 		domBtnEditTodo.textContent = 'Edit';
 
 		return domTodoItem;
@@ -67,7 +69,7 @@ const ui = (function() {
 		`;
 	}
 
-	function createForm(parent, data) {
+	function createForm(parent, data, type='Add Todo') {
 		const form = document.createElement('form');
 		form.classList.add('todo-edit-form');
 		form.innerHTML = `
@@ -89,7 +91,7 @@ const ui = (function() {
 			</select>
 			<br>
 
-			<input type='submit' value='Add Todo' class='btn submit'>
+			<input type='submit' value='${type}' class='btn submit'>
 		`;
 
 		let popup = popupWindow(parent);
@@ -108,10 +110,6 @@ const ui = (function() {
 		form.addEventListener('submit', (e) => {
 			e.preventDefault();
 			formSubmit(data.id, e.target);
-			console.log(e.target.title.value);
-			console.log(e.target.description.value);
-			console.log(e.target.dueDate.value);
-			console.log(e.target.priority.value);
 		});
 	}
 
@@ -161,7 +159,7 @@ const ui = (function() {
 
 	function handleStatusClicked(btn, todoData) {
 		btn.textContent = btn.textContent === '✖' ? '✔' : '✖';
-		btn.classList.toggle('status-btn-completed')
+		btn.classList.toggle('todo-status-completed-btn')
 		let completed = btn.textContent === '✖' ? true : false;
 
 		PubSub.emit(PubSub.eventCODE.UPDATE_TODO, todoData.id, {completed});
@@ -175,7 +173,7 @@ const ui = (function() {
 	}
 
 	function handleEditClicked(event, todoData) {
-		createForm(domBody, todoData);
+		createForm(domBody, todoData, 'Edit');
 	}
 
 	function updateTodo(id, newData) {

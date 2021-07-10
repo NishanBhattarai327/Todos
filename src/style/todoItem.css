@@ -16,8 +16,8 @@
   font-size: 10px;
 }
 
-/***********************status btn style start*****************************/
-.todo-status-btn {
+/***********************todo btn style start*****************************/
+.todo-status-btn{
     display: inline-block;
     width: 30px;
     text-align: center;
@@ -53,7 +53,7 @@
     background: linear-gradient(to bottom, #2b983b, #2b983b);
 }
 
-.status-btn-completed {
+.todo-status-completed-btn {
     border: 1px solid #aa0305;
     background: #ff060a;
     background: -webkit-gradient(linear, left top, left bottom, from(#ff060a), to(#aa0305));
@@ -63,22 +63,70 @@
     -moz-box-shadow: #ff070c 0px 0px 22px 0px;
     box-shadow: #ff070c 0px 0px 22px 0px;
 }
-.status-btn-completed:hover,
-.status-btn-completed:focus {
+.todo-status-completed-btn:hover,
+.todo-status-completed-btn:focus {
     border: 1px solid ##c80406;
     background: #ff070c;
     background: -webkit-gradient(linear, left top, left bottom, from(#ff070c), to(#cc0406));
     background: -moz-linear-gradient(top, #ff070c, #cc0406);
     background: linear-gradient(to bottom, #ff070c, #cc0406);
 }
-.status-btn-completed:active {
+.todo-status-completed-btn:active {
     background: #aa0305;
     background: -webkit-gradient(linear, left top, left bottom, from(#aa0305), to(#aa0305));
     background: -moz-linear-gradient(top, #aa0305, #aa0305);
     background: linear-gradient(to bottom, #aa0305, #aa0305);
 }
 
-/**************************status btn style end*******************************/
+
+.todo-edit-btn {
+  box-shadow:inset 0px 1px 0px 0px #7a8eb9;
+  background:linear-gradient(to bottom, #637aad 5%, #5972a7 100%);
+  background-color:#637aad;
+  border:1px solid #314179;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:16px;
+  font-weight:bold;
+  padding:6px 12px;
+  text-decoration:none;
+}
+.todo-edit-btn:hover {
+  background:linear-gradient(to bottom, #5972a7 5%, #637aad 100%);
+  background-color:#5972a7;
+}
+.todo-edit-btn:active {
+  position:relative;
+  top:1px;
+}
+
+.todo-remove-btn {
+  box-shadow:inset 0px 1px 0px 0px #f5978e;
+  background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+  background-color:#f24537;
+  border:1px solid #d02718;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:6px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #810e05;
+}
+.todo-remove-btn:hover {
+  background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+  background-color:#c62d1f;
+}
+.todo-remove-btn:active {
+  position:relative;
+  top:1px;
+}
+
+/**************************todo btn style end*******************************/
 
 
 /********************popup window style start******************/
