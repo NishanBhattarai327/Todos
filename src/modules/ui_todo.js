@@ -26,22 +26,23 @@ const ui = (function() {
 		let domTodoItem = document.createElement('li');
 		domTodoItem.classList.add('todo-item');
 
-		let domTodoContent = document.createElement('div');
 		let domBtnTodoStatus = document.createElement('button');
 		let domBtnRemoveTodo = document.createElement('button');
 		let domBtnEditTodo = document.createElement('button');
 
+		let domTodoContent = document.createElement('div');
+		domTodoContent.setAttribute('id', `id-${todoData.id}`);
 		domTodoContent.classList.add('todo-item-content');
 		domTodoContent.innerHTML = todoHtml(todoData);
 
-		domBtnTodoStatus.classList.add('todo-item-status');
+		domBtnTodoStatus.classList.add('todo-status-btn');
 
 		domTodoItem.append(domBtnTodoStatus);
 		domTodoItem.append(domTodoContent);
 		domTodoItem.append(domBtnRemoveTodo);
 		domTodoItem.append(domBtnEditTodo);
 
-		domBtnTodoStatus.textContent = todoData.completed ? 'finished' : 'unfinished';
+		domBtnTodoStatus.textContent = todoData.completed ? '✖' : '✔';
 		domBtnTodoStatus.addEventListener('click', (e) => handleStatusClicked(e.target, todoData));
 
 		domBtnRemoveTodo.addEventListener('click', (e) => removeTodo(e, todoData));
@@ -78,12 +79,12 @@ const ui = (function() {
 			<br>
 
 			<label for='due-date'>Due Date</label>
-			<input type='date' name='due-date' id='due-date' class='field due-date' value='${data.dueDate}'> <br>
+			<input type='date' name='dueDate' id='due-date' class='field due-date' value='${data.dueDate}'> <br>
 
 			<label for='priority'>Priority</label>
 			<select name="priority" id='priority' class='field priority'>
 			    <option value="high">high</option>
-			    <option value="midium">Medium</option>
+			    <option value="medium">medium</option>
 			    <option value="low">low</option>
 			</select>
 			<br>
@@ -106,7 +107,11 @@ const ui = (function() {
 
 		form.addEventListener('submit', (e) => {
 			e.preventDefault();
-			console.log('form submited');
+			formSubmit(data.id, e.target);
+			console.log(e.target.title.value);
+			console.log(e.target.description.value);
+			console.log(e.target.dueDate.value);
+			console.log(e.target.priority.value);
 		});
 	}
 
@@ -132,28 +137,35 @@ const ui = (function() {
 		// When the user clicks anywhere outside of the popup, close it
 		window.addEventListener('click', (event) => {
 		  if (event.target == popup) {
-		    removePopup(parent, popup);
+		    removePopup(parent);
 		  }
 		});
 
 		return popup;
 	}
 
-	function removePopup(parent, popup) {
-		parent.removeChild(popup);
-	}	
+	function formSubmit(todoId, form) {
+		let title = form.title.value;
+		let description = form.description.value;
+		let dueDate = form.dueDate.value;
+		let priority = form.priority.value;
 
-	function redrawTodo(parent, dataId){
-		let data = PubSub.emit(PubSub.eventCODE.GET_TODO_ITEM, dataId);
-		parent.querySelector('.todo-item-content').innerHTML = todoHtml(data);
+		updateTodo(todoId, {title, description, dueDate, priority});
+		removePopup();
 	}
 
+	function removePopup(parent=domBody) {
+		parent.removeChild(document.querySelector('.pop-up-window'));
+	}	
+
+
 	function handleStatusClicked(btn, todoData) {
-		btn.textContent = btn.textContent === 'finished' ? 'unfinished' : 'finished';
-		let completed = btn.textContent === 'finished' ? true : false;
+		btn.textContent = btn.textContent === '✖' ? '✔' : '✖';
+		btn.classList.toggle('status-btn-completed')
+		let completed = btn.textContent === '✖' ? true : false;
 
 		PubSub.emit(PubSub.eventCODE.UPDATE_TODO, todoData.id, {completed});
-		redrawTodo(btn.parentNode, todoData.id);
+		redrawTodo(todoData.id);
 	}
 
 	function removeTodo(event, todoData) {
@@ -164,18 +176,19 @@ const ui = (function() {
 
 	function handleEditClicked(event, todoData) {
 		createForm(domBody, todoData);
-		editTodo(event.target.parentNode, todoData);
 	}
 
-	function editTodo(parentNode, todoData) {
+	function updateTodo(id, newData) {
 		PubSub.emit(
-			PubSub.eventCODE.UPDATE_TODO, 
-			todoData.id, 
-			{title: 'Eat rice', priority: 'low', description:'dal-bhat'}
+			PubSub.eventCODE.UPDATE_TODO, id, newData
 		);
-		redrawTodo(parentNode, todoData.id);
+		redrawTodo(id);
 	}
 
+	function redrawTodo(dataId){
+		let data = PubSub.emit(PubSub.eventCODE.GET_TODO_ITEM, dataId);
+		document.querySelector(`#id-${dataId}`).innerHTML = todoHtml(data);
+	}
 
 	return { displayTodoList, gluePubSub, glueUiBody };
 })();
