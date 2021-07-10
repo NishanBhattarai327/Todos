@@ -1,5 +1,4 @@
 import '../style/todoItem.css';
-// import { todoList as listTodo } from './todos';
 
 const ui = (function() {
 	const domBody = document.querySelector('.content');
@@ -47,11 +46,11 @@ const ui = (function() {
 
 		domBtnRemoveTodo.addEventListener('click', (e) => removeTodo(e, todoData));
 		domBtnRemoveTodo.classList.add('todo-remove-btn');
-		domBtnRemoveTodo.textContent = 'Remove';
+		domBtnRemoveTodo.textContent = '🗑';
 
 		domBtnEditTodo.addEventListener('click', (e) => handleEditClicked(e, todoData));
 		domBtnEditTodo.classList.add('todo-edit-btn');
-		domBtnEditTodo.textContent = 'Edit';
+		domBtnEditTodo.textContent = '✎';
 
 		return domTodoItem;
 	}
