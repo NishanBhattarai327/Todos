@@ -1,14 +1,30 @@
 .todo-item {
-	border: 2px dotted pink;
-	padding: 20px;
-	margin: 5px;
+	padding: 5px;
+  
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+}
+.todo-item:not(:first-child) {
+	margin-top: 5px;
+	border-top: 1px dashed pink;
 }
 
 .todo-item-content {
-	color: darkred;
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  column-gap: 20px;
+  font-family: monospace;
 }
 
 .status-finished {
+  opacity: 0.5;
+}
+.status-finished-text {
 	text-decoration: line-through;
 }
 
@@ -17,80 +33,75 @@
 }
 
 /***********************todo btn style start*****************************/
+.todo-btn {
+  flex: 0 0 auto;
+  display: inline-block;
+  color: #ffffff;
+  text-align: center;
+  cursor:pointer;
+  font-family:monospace;
+  border-radius: 3px;
+  font-size: 20px;
+  padding: 4px;
+}
 .todo-status-btn{
-    display: inline-block;
-    width: 30px;
-    text-align: center;
-    vertical-align: middle;
-    border: 1px solid #2b983b;
-    border-radius: 3px;
-    background: #46f760;
-    background: -webkit-gradient(linear, left top, left bottom, from(#46f760), to(#2b983b));
-    background: -moz-linear-gradient(top, #46f760, #2b983b);
-    background: linear-gradient(to bottom, #46f760, #2b983b);
-    -webkit-box-shadow: #41e459 0px 0px 22px 0px;
-    -moz-box-shadow: #41e459 0px 0px 22px 0px;
-    box-shadow: #41e459 0px 0px 22px 0px;
-    text-shadow: #1b5f25 1px 1px 1px;
-    font: normal normal normal 20px arial;
-    color: #ffffff;
-    text-decoration: none;
+  width: 30px;
+  border: 1px solid #2b983b;
+  background: #46f760;
+  background: -webkit-gradient(linear, left top, left bottom, from(#46f760), to(#2b983b));
+  background: -moz-linear-gradient(top, #46f760, #2b983b);
+  background: linear-gradient(to bottom, #46f760, #2b983b);
+  -webkit-box-shadow: #41e459 0px 0px 22px 0px;
+  -moz-box-shadow: #41e459 0px 0px 22px 0px;
+  box-shadow: #41e459 0px 0px 22px 0px;
+  text-shadow: #1b5f25 1px 1px 1px;
 }
 .todo-status-btn:hover,
 .todo-status-btn:focus {
-    border: 1px solid ##36be4a;
-    background: #54ff73;
-    background: -webkit-gradient(linear, left top, left bottom, from(#54ff73), to(#34b647));
-    background: -moz-linear-gradient(top, #54ff73, #34b647);
-    background: linear-gradient(to bottom, #54ff73, #34b647);
-    color: #ffffff;
-    text-decoration: none;
+  border: 1px solid ##36be4a;
+  background: #54ff73;
+  background: -webkit-gradient(linear, left top, left bottom, from(#54ff73), to(#34b647));
+  background: -moz-linear-gradient(top, #54ff73, #34b647);
+  background: linear-gradient(to bottom, #54ff73, #34b647);
+  color: #ffffff;
 }
 .todo-status-btn:active {
-    background: #2b983b;
-    background: -webkit-gradient(linear, left top, left bottom, from(#2b983b), to(#2b983b));
-    background: -moz-linear-gradient(top, #2b983b, #2b983b);
-    background: linear-gradient(to bottom, #2b983b, #2b983b);
+  background: #2b983b;
+  background: -webkit-gradient(linear, left top, left bottom, from(#2b983b), to(#2b983b));
+  background: -moz-linear-gradient(top, #2b983b, #2b983b);
+  background: linear-gradient(to bottom, #2b983b, #2b983b);
 }
 
 .todo-status-completed-btn {
-    border: 1px solid #aa0305;
-    background: #ff060a;
-    background: -webkit-gradient(linear, left top, left bottom, from(#ff060a), to(#aa0305));
-    background: -moz-linear-gradient(top, #ff060a, #aa0305);
-    background: linear-gradient(to bottom, #ff060a, #aa0305);
-    -webkit-box-shadow: #ff070c 0px 0px 22px 0px;
-    -moz-box-shadow: #ff070c 0px 0px 22px 0px;
-    box-shadow: #ff070c 0px 0px 22px 0px;
+  border: 1px solid #aa0305;
+  background: #ff060a;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff060a), to(#aa0305));
+  background: -moz-linear-gradient(top, #ff060a, #aa0305);
+  background: linear-gradient(to bottom, #ff060a, #aa0305);
+  -webkit-box-shadow: #ff070c 0px 0px 22px 0px;
+  -moz-box-shadow: #ff070c 0px 0px 22px 0px;
+  box-shadow: #ff070c 0px 0px 22px 0px;
 }
 .todo-status-completed-btn:hover,
 .todo-status-completed-btn:focus {
-    border: 1px solid ##c80406;
-    background: #ff070c;
-    background: -webkit-gradient(linear, left top, left bottom, from(#ff070c), to(#cc0406));
-    background: -moz-linear-gradient(top, #ff070c, #cc0406);
-    background: linear-gradient(to bottom, #ff070c, #cc0406);
+  border: 1px solid ##c80406;
+  background: #ff070c;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff070c), to(#cc0406));
+  background: -moz-linear-gradient(top, #ff070c, #cc0406);
+  background: linear-gradient(to bottom, #ff070c, #cc0406);
 }
 .todo-status-completed-btn:active {
-    background: #aa0305;
-    background: -webkit-gradient(linear, left top, left bottom, from(#aa0305), to(#aa0305));
-    background: -moz-linear-gradient(top, #aa0305, #aa0305);
-    background: linear-gradient(to bottom, #aa0305, #aa0305);
+  background: #aa0305;
+  background: -webkit-gradient(linear, left top, left bottom, from(#aa0305), to(#aa0305));
+  background: -moz-linear-gradient(top, #aa0305, #aa0305);
+  background: linear-gradient(to bottom, #aa0305, #aa0305);
 }
-
 
 .todo-edit-btn {
   box-shadow:inset 0px 1px 0px 0px #7a8eb9;
   background:linear-gradient(to bottom, #637aad 5%, #5972a7 100%);
   background-color:#637aad;
   border:1px solid #314179;
-  display:inline-block;
-  cursor:pointer;
-  color:#ffffff;
-  font-family:Arial;
-  font-size:32px;
-  padding:4px 8px;
-  text-decoration:none;
 }
 .todo-edit-btn:hover {
   background:linear-gradient(to bottom, #5972a7 5%, #637aad 100%);
@@ -103,16 +114,9 @@
 
 .todo-remove-btn {
   box-shadow:inset 0px 1px 0px 0px #f5978e;
-  background-color:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+  background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
   background-color:#f24537;
   border:1px solid #d02718;
-  display:inline-block;
-  cursor:pointer;
-  color:#ffffff;
-  font-family:Arial;
-  font-size:32px;
-  padding:4px 8px;
-  text-decoration:none;
   text-shadow:0px 1px 0px #810e05;
 }
 .todo-remove-btn:hover {

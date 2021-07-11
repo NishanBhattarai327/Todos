@@ -29,28 +29,29 @@ const ui = (function() {
 		let domBtnRemoveTodo = document.createElement('button');
 		let domBtnEditTodo = document.createElement('button');
 
+		domBtnTodoStatus.classList.add('todo-btn', 'todo-status-btn');
+		domBtnRemoveTodo.classList.add('todo-btn', 'todo-remove-btn');
+		domBtnEditTodo.classList.add('todo-btn', 'todo-edit-btn');
+
+		domBtnTodoStatus.textContent = todoData.completed ? '✖' : '✔';
+		domBtnRemoveTodo.textContent = 'Delete';
+		domBtnEditTodo.textContent = 'Edit';
+
+		domBtnTodoStatus.addEventListener('click', (e) => handleStatusClicked(e.target, todoData));
+		domBtnRemoveTodo.addEventListener('click', (e) => removeTodo(e, todoData));
+		domBtnEditTodo.addEventListener('click', (e) => handleEditClicked(e, todoData));
+
 		let domTodoContent = document.createElement('div');
 		domTodoContent.setAttribute('id', `id-${todoData.id}`);
 		domTodoContent.classList.add('todo-item-content');
 		domTodoContent.innerHTML = todoHtml(todoData);
 
-		domBtnTodoStatus.classList.add('todo-status-btn');
 
 		domTodoItem.append(domBtnTodoStatus);
 		domTodoItem.append(domTodoContent);
 		domTodoItem.append(domBtnRemoveTodo);
 		domTodoItem.append(domBtnEditTodo);
 
-		domBtnTodoStatus.textContent = todoData.completed ? '✖' : '✔';
-		domBtnTodoStatus.addEventListener('click', (e) => handleStatusClicked(e.target, todoData));
-
-		domBtnRemoveTodo.addEventListener('click', (e) => removeTodo(e, todoData));
-		domBtnRemoveTodo.classList.add('todo-remove-btn');
-		domBtnRemoveTodo.textContent = '🗑';
-
-		domBtnEditTodo.addEventListener('click', (e) => handleEditClicked(e, todoData));
-		domBtnEditTodo.classList.add('todo-edit-btn');
-		domBtnEditTodo.textContent = '✎';
 
 		return domTodoItem;
 	}
@@ -61,10 +62,10 @@ const ui = (function() {
 			status = 'finished';
 		}
 		return `
-			<span class='todo-title status-${status}'>${todoData.title}</span> 
-			<span class='todo-description status-${status}'>${todoData.description}</span>
-			<span class='todo-priority status-${status}'>priority: ${todoData.priority}</span>
-			<span class='todo-due-date status-${status}'>due-date: ${todoData.dueDate}</span>
+			<span class='todo-title status-${status}-text'>${todoData.title}</span> 
+			<span class='todo-description status-${status}-text'>${todoData.description}</span>
+			<span class='todo-priority status-${status}-text'>priority: ${todoData.priority}</span>
+			<span class='todo-due-date status-${status}-text'>due-date: ${todoData.dueDate}</span>
 		`;
 	}
 
@@ -158,7 +159,8 @@ const ui = (function() {
 
 	function handleStatusClicked(btn, todoData) {
 		btn.textContent = btn.textContent === '✖' ? '✔' : '✖';
-		btn.classList.toggle('todo-status-completed-btn')
+		btn.parentNode.classList.toggle('status-finished');
+		btn.classList.toggle('todo-status-completed-btn');
 		let completed = btn.textContent === '✖' ? true : false;
 
 		PubSub.emit(PubSub.eventCODE.UPDATE_TODO, todoData.id, {completed});
