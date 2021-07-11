@@ -14,11 +14,23 @@
 
 .todo-item-content {
   flex-grow: 1;
+  flex-shrink: 0;
+
   display: flex;
-  justify-content: space-between;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   column-gap: 20px;
+
   font-family: monospace;
+}
+.todo-title, .todo-description {
+  flex-shrink: 0;
+}
+.todo-priority, .todo-due-date {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.todo-priority {
+  margin-left: auto;
 }
 
 .status-finished {
@@ -28,9 +40,10 @@
 	text-decoration: line-through;
 }
 
-.todo-item-content .todo-description {
+.todo-description {
   font-size: 10px;
 }
+
 
 /***********************todo btn style start*****************************/
 .todo-btn {
