@@ -12,7 +12,9 @@ const ui = (function() {
 		domBody = body;
 	}
 
-	function displayTodoList(list) {
+	function displayTodoList() {
+		let list = PubSub.emit(PubSub.eventCODE.GET_TODO_LIST);
+		
 		let domList = document.createElement('ul');
 		domList.classList.add('todo-list');
 		list.forEach((todoData) => {

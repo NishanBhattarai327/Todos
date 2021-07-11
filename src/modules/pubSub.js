@@ -1,11 +1,12 @@
 const PubSub = (() => {
 	let events = {};
 
+	const GET_TODO_LIST = 'get-todo-list';
 	const UPDATE_TODO = 'update-todo-item-of-list';
 	const DELETE_TODO = 'delete-todo-item-of-list';
 	const GET_TODO_ITEM = 'get-todo-item-of-list-of-id';
 
-	let eventCODE = { UPDATE_TODO, DELETE_TODO, GET_TODO_ITEM };
+	let eventCODE = { GET_TODO_LIST, UPDATE_TODO, DELETE_TODO, GET_TODO_ITEM };
 
 	function subscribe(eventName, callback) {
 		if(!events.hasOwnProperty(eventName)){
@@ -22,11 +23,12 @@ const PubSub = (() => {
 		events[eventName].splice(index, 1);
 	}
 
-	function emit(eventName, ...info) {
+	function emit(eventName, ...args) {
 		let returnValue;
 		if(events[eventName] !== undefined){
 			events[eventName].forEach((callback) => {
-				returnValue = callback(...info);
+				if(args.length === 0) { returnValue = callback(); }
+				returnValue = callback(...args);
 			});
 		}
 		return returnValue;
