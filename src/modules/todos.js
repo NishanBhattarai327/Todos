@@ -1,4 +1,4 @@
-const todoList = (function() {
+const todos = (function() {
 	let list = [];
 
 	function getTodoList() {
@@ -35,8 +35,12 @@ const todoList = (function() {
 		return index;
 	}
 
-	return { getTodoList, getTodoItem, addTodo, deleteTodo, updateTodo, };
+	return { getTodoList, getTodoItem, addTodo, deleteTodo, updateTodo };
 
 })();
 
-export { todoList };
+const newTodos = () => {
+	return todos;
+}
+
+export { todos, newTodos };

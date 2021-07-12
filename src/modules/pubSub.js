@@ -5,8 +5,9 @@ const PubSub = (() => {
 	const UPDATE_TODO = 'update-todo-item-of-list';
 	const DELETE_TODO = 'delete-todo-item-of-list';
 	const GET_TODO_ITEM = 'get-todo-item-of-list-of-id';
+	const ADD_TODO = 'add-todo-to-list';
 
-	let eventCODE = { GET_TODO_LIST, UPDATE_TODO, DELETE_TODO, GET_TODO_ITEM };
+	let eventCODE = { GET_TODO_LIST, UPDATE_TODO, DELETE_TODO, GET_TODO_ITEM, ADD_TODO};
 
 	function subscribe(eventName, callback) {
 		if(!events.hasOwnProperty(eventName)){

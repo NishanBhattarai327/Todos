@@ -12,15 +12,34 @@ const ui = (function() {
 		domBody = body;
 	}
 
-	function displayTodoList() {
+	function render() {
+		clearDisplay();
+
 		let list = PubSub.emit(PubSub.eventCODE.GET_TODO_LIST);
+
+		let domTodos = document.createElement('div');
+		domTodos.classList.add('todos');
 		
 		let domList = document.createElement('ul');
 		domList.classList.add('todo-list');
 		list.forEach((todoData) => {
 			domList.append(createTodo(todoData));
 		});
-		domBody.append(domList);
+
+		let domAddBtn = document.createElement('button');
+		domAddBtn.textContent = 'Add Todo';
+		domAddBtn.addEventListener('click', () => addTodo());
+
+		domTodos.append(domList);
+		domTodos.append(domAddBtn);
+		domBody.append(domTodos);
+	}
+
+	function clearDisplay() {
+		let display = document.querySelector('.todos');
+		if(display) {
+			domBody.removeChild(display);
+		}
 	}
 
 	function createTodo(todoData) {
@@ -48,13 +67,13 @@ const ui = (function() {
 		domTodoContent.classList.add('todo-item-content');
 		domTodoContent.innerHTML = todoHtml(todoData);
 
-
 		domTodoItem.append(domBtnTodoStatus);
 		domTodoItem.append(domTodoContent);
 		domTodoItem.append(domBtnRemoveTodo);
 		domTodoItem.append(domBtnEditTodo);
 
-
+		btnState(domBtnTodoStatus, todoData.completed);
+		
 		return domTodoItem;
 	}
 
@@ -69,6 +88,11 @@ const ui = (function() {
 			<span class='todo-priority status-${status}-text'>priority: ${todoData.priority}</span>
 			<span class='todo-due-date status-${status}-text'>due-date: ${todoData.dueDate}</span>
 		`;
+	}
+
+	function addTodo() {
+		PubSub.emit(PubSub.eventCODE.ADD_TODO, { title:'hello', description: 'you are nice'});
+		render();
 	}
 
 	function createForm(parent, data, type='Add Todo') {
@@ -161,12 +185,22 @@ const ui = (function() {
 
 	function handleStatusClicked(btn, todoData) {
 		btn.textContent = btn.textContent === '✖' ? '✔' : '✖';
-		btn.parentNode.classList.toggle('status-finished');
-		btn.classList.toggle('todo-status-completed-btn');
 		let completed = btn.textContent === '✖' ? true : false;
+		btnState(btn, completed);
 
 		PubSub.emit(PubSub.eventCODE.UPDATE_TODO, todoData.id, {completed});
 		redrawTodo(todoData.id);
+	}
+
+	function btnState(btn, boolean) {
+		if(boolean) {
+			btn.parentNode.classList.add('status-finished');
+			btn.classList.add('todo-status-completed-btn');
+		}
+		else {
+			btn.parentNode.classList.remove('status-finished');
+			btn.classList.remove('todo-status-completed-btn');
+		}
 	}
 
 	function removeTodo(event, todoData) {
@@ -191,7 +225,7 @@ const ui = (function() {
 		document.querySelector(`#id-${dataId}`).innerHTML = todoHtml(data);
 	}
 
-	return { displayTodoList, gluePubSub, glueUiBody };
+	return { render, gluePubSub, glueUiBody };
 })();
 
 export { ui };
