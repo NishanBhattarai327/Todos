@@ -27,7 +27,8 @@ const ui = (function() {
 		});
 
 		let domAddBtn = document.createElement('button');
-		domAddBtn.textContent = 'Add Todo';
+		domAddBtn.classList.add('todo-add-btn', 'todo-btn');
+		domAddBtn.textContent = '+';
 		domAddBtn.addEventListener('click', () => addTodo());
 
 		domTodos.append(domList);
@@ -73,7 +74,7 @@ const ui = (function() {
 		domTodoItem.append(domBtnEditTodo);
 
 		btnState(domBtnTodoStatus, todoData.completed);
-		
+
 		return domTodoItem;
 	}
 
