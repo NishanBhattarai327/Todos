@@ -1,3 +1,5 @@
+import '../style/project.css';
+
 const ui = (function() {
 	let domBody = document.querySelector('.content');
 	let PubSub;
@@ -15,7 +17,6 @@ const ui = (function() {
 
 		let list = PubSub.emit(PubSub.eventCODE.GET_PROJECT_LIST);
 		let focusedProject = PubSub.emit(PubSub.eventCODE.GET_FOCUSED_PROJECT);
-		console.log(focusedProject);
 
 		let domProjects = document.createElement('div');
 		domProjects.classList.add('projects');
@@ -31,7 +32,7 @@ const ui = (function() {
 		});
 
 		let domAddBtn = document.createElement('button');
-		domAddBtn.classList.add('project-add-btn', 'project-btn');
+		domAddBtn.classList.add('add-btn', 'btn');
 		domAddBtn.textContent = '+';
 		domAddBtn.addEventListener('click', (e) => handleAddClicked(e.target));
 
@@ -58,10 +59,10 @@ const ui = (function() {
 		domInfo.classList.add('project-info');
 		domInfo.innerHTML = data.title;
 
-		removeBtn.classList.add('project-btn', 'project-remove-btn');
-		editBtn.classList.add('project-btn', 'project-edit-btn');
+		removeBtn.classList.add('btn', 'remove-btn', 'left');
+		editBtn.classList.add('btn', 'edit-btn');
 
-		removeBtn.textContent = 'Delete';
+		removeBtn.textContent = 'Del';
 		editBtn.textContent = 'Edit';
 
 		removeBtn.addEventListener('click', (e) => handleRemoveClicked(e.target, data.id));
@@ -76,7 +77,7 @@ const ui = (function() {
 
 	function createForm(parent, data, type='Add Project') {
 		const form = document.createElement('form');
-		form.classList.add('project-edit-form');
+		form.classList.add('form');
 		form.innerHTML = `
 			<label for='title'>Title</label>
 			<input type='text' name='title' id='title' class='field title' value='${data.title|| ''}'><br>

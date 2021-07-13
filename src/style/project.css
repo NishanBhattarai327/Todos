@@ -1,0 +1,30 @@
+.project-list {
+	margin-bottom: 40px;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.focused-project {
+	position: relative;
+	background: #abcabc;
+	left: 10px;
+}
+
+.project {
+	padding: 5px 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	column-gap: 5px;
+}
+
+.left {
+	margin-left: auto;
+}
+
+.project-info {
+	min-width: 100px;
+	max-width: 200px;
+	overflow: hidden;
+}

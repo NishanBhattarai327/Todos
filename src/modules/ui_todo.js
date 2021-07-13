@@ -1,4 +1,4 @@
-import '../style/todoItem.css';
+import '../style/todo.css';
 
 const ui = (function() {
 	let domBody = document.querySelector('.content');
@@ -56,7 +56,7 @@ const ui = (function() {
 		domBtnEditTodo.classList.add('todo-btn', 'todo-edit-btn');
 
 		domBtnTodoStatus.textContent = todoData.completed ? '✖' : '✔';
-		domBtnRemoveTodo.textContent = 'Delete';
+		domBtnRemoveTodo.textContent = 'Del';
 		domBtnEditTodo.textContent = 'Edit';
 
 		domBtnTodoStatus.addEventListener('click', (e) => handleStatusClicked(e.target, todoData));

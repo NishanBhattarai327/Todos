@@ -1,15 +1,7 @@
-/*.todo-list {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}*/
-
 .todo-item {
 	padding: 5px;
   
   display: flex;
-  flex-wrap: nowrap;
   justify-content: space-between;
   align-items: baseline;
   gap: 20px;
@@ -53,7 +45,7 @@
 
 
 /***********************todo btn style start*****************************/
-.todo-btn {
+.btn, .todo-btn {
   flex: 0 0 auto;
   display: inline-block;
   color: #ffffff;
@@ -65,7 +57,7 @@
   padding: 4px;
 }
 
-.todo-add-btn {
+.add-btn, .todo-add-btn {
   margin: auto;
   display: block;
   width: 200px;
@@ -79,11 +71,11 @@
   padding:6px 24px;
   text-shadow:0px 1px 0px #aade7c;
 }
-.todo-add-btn:hover {
+.add-btn:hover, .todo-add-btn:hover {
   background:linear-gradient(to bottom, #5cb811 5%, #77d42a 100%);
   background-color:#5cb811;
 }
-.todo-add-btn:active {
+.add-btn:active, .todo-add-btn:active {
   position:relative;
   top:1px;
 }
@@ -141,33 +133,33 @@
   background: linear-gradient(to bottom, #aa0305, #aa0305);
 }
 
-.todo-edit-btn {
+.edit-btn, .todo-edit-btn {
   box-shadow:inset 0px 1px 0px 0px #7a8eb9;
   background:linear-gradient(to bottom, #637aad 5%, #5972a7 100%);
   background-color:#637aad;
   border:1px solid #314179;
 }
-.todo-edit-btn:hover {
+.edit-btn:hover, .todo-edit-btn:hover {
   background:linear-gradient(to bottom, #5972a7 5%, #637aad 100%);
   background-color:#5972a7;
 }
-.todo-edit-btn:active {
+.edit-btn:active, .todo-edit-btn:active {
   position:relative;
   top:1px;
 }
 
-.todo-remove-btn {
+.remove-btn, .todo-remove-btn {
   box-shadow:inset 0px 1px 0px 0px #f5978e;
   background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
   background-color:#f24537;
   border:1px solid #d02718;
   text-shadow:0px 1px 0px #810e05;
 }
-.todo-remove-btn:hover {
+.remove-btn:hover, .todo-remove-btn:hover {
   background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
   background-color:#c62d1f;
 }
-.todo-remove-btn:active {
+.remove-btn:active, .todo-remove-btn:active {
   position:relative;
   top:1px;
 }
@@ -216,7 +208,7 @@
 
 
 /********************form style start*************************************/
-.todo-form {
+.form, .todo-form {
   margin: 10px;
 }
 
@@ -239,7 +231,7 @@
   border-color: #000;
 }
 
-.todo-form .btn {
+.form .btn, .todo-form .btn {
   width: 49.9%;
   background-color: #04AA6D;
   color: white;
@@ -251,16 +243,16 @@
   box-shadow:0 0 4px rgba(0,255,0,0.7);
   transition: .3s box-shadow;
 }
-.todo-form .cancel {
+.form .cancel, .todo-form .cancel {
   float: right;
   background-color: red;
   box-shadow:0 0 4px rgba(255,0,0,0.7);
 }
-.todo-form .btn:hover {
+.form .btn:hover, .todo-form .btn:hover {
   box-shadow:0 0 4px rgba(0,255,0,0.9);
   opacity: 1;
 }
-.todo-form .cancel:hover {
+.form .cancel:hover, .todo-form .cancel:hover {
   box-shadow:0 0 4px rgba(255,0,0,0.9);
   opacity: 1;
 }
