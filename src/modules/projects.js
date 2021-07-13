@@ -1,5 +1,14 @@
 const projects = (function() {
 	let list = [];
+	let focusedProjectId = 0;
+
+	function getFocusedProject() {
+		return focusedProjectId;
+	}
+
+	function changeFocusToProjectOfId(id) {
+		focusedProjectId = id;
+	}
 
 	function getTodoList(id) {
 		let index = getIndex(id);
@@ -44,7 +53,11 @@ const projects = (function() {
 	}
 
 
-	return { getProjectList, getProject, addProject, updateProject, deleteProject, getTodoList, addTodoList };
+	return { 
+		getProjectList, getProject, addProject, updateProject, deleteProject, 
+		getTodoList, addTodoList,
+		getFocusedProject, changeFocusToProjectOfId
+	};
 })();
 
 export { projects };

@@ -11,10 +11,10 @@ today.addTodo({title: 'Washing Cloth', description: 'school dress', dueDate: '20
 today.addTodo({title: 'Washing Cloth', description: 'school dress', dueDate: '2018-07-22', priority: 'high'});
 today.addTodo({title: 'Washing Cloth', description: 'school dress', dueDate: '2018-07-22', priority: 'high'});
 
-projects.addProject({title:'Basic'});
-projects.addProject({title:'Basic'});
-projects.addProject({title:'Basic'});
-projects.addProject({title:'Basic'});
+projects.addProject({title:'Basic 0'});
+projects.addProject({title:'Basic 1'});
+projects.addProject({title:'Basic 2'});
+projects.addProject({title:'Basic 3'});
 projects.addTodoList(0, today);
 // console.log(projects.getProjectList());
 // console.log(projects.getProject(0));
@@ -25,6 +25,8 @@ PubSub.subscribe(PubSub.eventCODE.GET_PROJECT_LIST, projects.getProjectList);
 PubSub.subscribe(PubSub.eventCODE.ADD_PROJECT, projects.addProject);
 PubSub.subscribe(PubSub.eventCODE.UPDATE_PROJECT, projects.updateProject);
 PubSub.subscribe(PubSub.eventCODE.DELETE_PROJECT, projects.deleteProject);
+PubSub.subscribe(PubSub.eventCODE.GET_FOCUSED_PROJECT, projects.getFocusedProject);
+PubSub.subscribe(PubSub.eventCODE.CHANGE_FOCUS_TO_PROJECT_OF_ID, projects.changeFocusToProjectOfId);
 
 PubSub.subscribe(PubSub.eventCODE.GET_TODO_LIST, current.getTodoList);
 PubSub.subscribe(PubSub.eventCODE.ADD_TODO, current.addTodo);

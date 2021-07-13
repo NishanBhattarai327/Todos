@@ -5,7 +5,9 @@ const PubSub = (() => {
 	const ADD_PROJECT = 'add-project-to-projects-list';
 	const UPDATE_PROJECT = 'update-project-of-projects-list';
 	const DELETE_PROJECT = 'delete-project-of-projects-list';
-	const GET_PROJECT_ITEM = 'get-project-form-list-with-id';
+	const GET_PROJECT = 'get-project-form-list-with-id';
+	const GET_FOCUSED_PROJECT = 'get-focused-project-from-list';
+	const CHANGE_FOCUS_TO_PROJECT_OF_ID = 'change-focus-to-project-of-id';
 	const GET_TODO_LIST = 'get-todo-list';
 	const ADD_TODO = 'add-todo-to-todo-list';
 	const UPDATE_TODO = 'update-todo-item-of-list';
@@ -14,7 +16,8 @@ const PubSub = (() => {
 
 
 	let eventCODE = { 
-		GET_PROJECT_LIST, ADD_PROJECT, UPDATE_PROJECT, DELETE_PROJECT, GET_PROJECT_ITEM,
+		GET_PROJECT_LIST, ADD_PROJECT, UPDATE_PROJECT, DELETE_PROJECT, GET_PROJECT, 
+		GET_FOCUSED_PROJECT, CHANGE_FOCUS_TO_PROJECT_OF_ID,
 		GET_TODO_LIST,    ADD_TODO,    UPDATE_TODO,    DELETE_TODO,    GET_TODO_ITEM
 	};
 

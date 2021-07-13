@@ -14,6 +14,8 @@ const ui = (function() {
 		clearDisplay();
 
 		let list = PubSub.emit(PubSub.eventCODE.GET_PROJECT_LIST);
+		let focusedProject = PubSub.emit(PubSub.eventCODE.GET_FOCUSED_PROJECT);
+		console.log(focusedProject);
 
 		let domProjects = document.createElement('div');
 		domProjects.classList.add('projects');
@@ -21,7 +23,11 @@ const ui = (function() {
 		let domList = document.createElement('ul');
 		domList.classList.add('project-list');
 		list.forEach((data) => {
-			domList.append(createProject(data));
+			let projectView = createProject(data);
+			if(data.id === focusedProject) {
+				projectView.classList.add('focused-project');
+			}
+			domList.append(projectView);
 		});
 
 		let domAddBtn = document.createElement('button');
@@ -44,6 +50,7 @@ const ui = (function() {
 	function createProject(data) {
 		let domProject = document.createElement('li');
 		domProject.classList.add('project');
+		domProject.addEventListener('click', (e) => handleFocusedProject(e.target, data));
 
 		let removeBtn = document.createElement('button');
 		let editBtn = document.createElement('button');
@@ -138,6 +145,11 @@ const ui = (function() {
 		}
 
 		removePopup();
+	}
+
+	function handleFocusedProject(btn, data) {
+		PubSub.emit(PubSub.eventCODE.CHANGE_FOCUS_TO_PROJECT_OF_ID, data.id);
+		render();
 	}
 
 	function handleAddClicked(btn) {
