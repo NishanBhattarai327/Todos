@@ -29,7 +29,7 @@ const ui = (function() {
 		let domAddBtn = document.createElement('button');
 		domAddBtn.classList.add('todo-add-btn', 'todo-btn');
 		domAddBtn.textContent = '+';
-		domAddBtn.addEventListener('click', () => addTodo());
+		domAddBtn.addEventListener('click', (e) => handleAddTodoClicked(e.target));
 
 		domTodos.append(domList);
 		domTodos.append(domAddBtn);
@@ -60,8 +60,8 @@ const ui = (function() {
 		domBtnEditTodo.textContent = 'Edit';
 
 		domBtnTodoStatus.addEventListener('click', (e) => handleStatusClicked(e.target, todoData));
-		domBtnRemoveTodo.addEventListener('click', (e) => removeTodo(e, todoData));
-		domBtnEditTodo.addEventListener('click', (e) => handleEditClicked(e, todoData));
+		domBtnRemoveTodo.addEventListener('click', (e) => handleRemoveClicked(e.target, todoData.id));
+		domBtnEditTodo.addEventListener('click', (e) => handleEditClicked(e.target, todoData));
 
 		let domTodoContent = document.createElement('div');
 		domTodoContent.setAttribute('id', `id-${todoData.id}`);
@@ -91,24 +91,19 @@ const ui = (function() {
 		`;
 	}
 
-	function addTodo() {
-		PubSub.emit(PubSub.eventCODE.ADD_TODO, { title:'hello', description: 'you are nice'});
-		render();
-	}
-
 	function createForm(parent, data, type='Add Todo') {
 		const form = document.createElement('form');
 		form.classList.add('todo-edit-form');
 		form.innerHTML = `
 			<label for='title'>Title</label>
-			<input type='text' name='title' id='title' class='field title' value='${data.title}'> <br>
+			<input type='text' name='title' id='title' class='field title' value='${data.title|| ''}' autofocus><br>
 
 			<label for='description'>Description</label>
-			<textarea name='description' id='description' class='field description' rows="4" cols="50">${data.description}</textarea>
+			<textarea name='description' id='description' class='field description' rows="4" cols="50">${data.description || ''}</textarea>
 			<br>
 
 			<label for='due-date'>Due Date</label>
-			<input type='date' name='dueDate' id='due-date' class='field due-date' value='${data.dueDate}'> <br>
+			<input type='date' name='dueDate' id='due-date' class='field due-date' value='${data.dueDate || ''}'><br>
 
 			<label for='priority'>Priority</label>
 			<select name="priority" id='priority' class='field priority'>
@@ -120,6 +115,7 @@ const ui = (function() {
 
 			<input type='submit' value='${type}' class='btn submit'>
 		`;
+		form.querySelector('#priority').value = data.priority || 'low';
 
 		let popup = popupWindow(parent);
 		popup.querySelector('.pop-up-content').append(form);
@@ -136,7 +132,7 @@ const ui = (function() {
 
 		form.addEventListener('submit', (e) => {
 			e.preventDefault();
-			formSubmit(data.id, e.target);
+			formSubmit(e.target, data.id);
 		});
 	}
 
@@ -169,20 +165,29 @@ const ui = (function() {
 		return popup;
 	}
 
-	function formSubmit(todoId, form) {
-		let title = form.title.value;
-		let description = form.description.value;
-		let dueDate = form.dueDate.value;
-		let priority = form.priority.value;
+	function removePopup(parent=domBody) {
+		parent.removeChild(document.querySelector('.pop-up-window'));
+	}
 
-		updateTodo(todoId, {title, description, dueDate, priority});
+	function formSubmit(form, todoId) {
+		let title = form.title.value || 'Untitled';
+		let description = form.description.value || 'No description';
+		let dueDate = form.dueDate.value || '0000-00-00';
+		let priority = form.priority.value || 'low';
+
+		if(todoId === undefined) {
+			addTodo({title, description, dueDate, priority});
+		} else {
+			updateTodo(todoId, {title, description, dueDate, priority});
+		}
+
 		removePopup();
 	}
 
-	function removePopup(parent=domBody) {
-		parent.removeChild(document.querySelector('.pop-up-window'));
-	}	
-
+	function handleAddTodoClicked(btn) {
+		createForm(domBody, {});
+		render();
+	}
 
 	function handleStatusClicked(btn, todoData) {
 		btn.textContent = btn.textContent === '✖' ? '✔' : '✖';
@@ -190,7 +195,16 @@ const ui = (function() {
 		btnState(btn, completed);
 
 		PubSub.emit(PubSub.eventCODE.UPDATE_TODO, todoData.id, {completed});
-		redrawTodo(todoData.id);
+		render();
+	}
+
+	function handleEditClicked(btn, todoData) {
+		createForm(domBody, todoData, 'Edit');
+	}
+
+	function handleRemoveClicked(btn, todoData) {
+		PubSub.emit(PubSub.eventCODE.DELETE_TODO, todoData.id);
+		render();
 	}
 
 	function btnState(btn, boolean) {
@@ -204,27 +218,20 @@ const ui = (function() {
 		}
 	}
 
-	function removeTodo(event, todoData) {
-		let parent = event.target.parentNode.parentNode;
-		parent.removeChild(event.target.parentNode);
-		PubSub.emit(PubSub.eventCODE.DELETE_TODO, todoData.id);
-	}
-
-	function handleEditClicked(event, todoData) {
-		createForm(domBody, todoData, 'Edit');
+	function addTodo(data) {
+		PubSub.emit(
+			PubSub.eventCODE.ADD_TODO, data
+		);
+		render();
 	}
 
 	function updateTodo(id, newData) {
 		PubSub.emit(
 			PubSub.eventCODE.UPDATE_TODO, id, newData
 		);
-		redrawTodo(id);
+		render();
 	}
 
-	function redrawTodo(dataId){
-		let data = PubSub.emit(PubSub.eventCODE.GET_TODO_ITEM, dataId);
-		document.querySelector(`#id-${dataId}`).innerHTML = todoHtml(data);
-	}
 
 	return { render, gluePubSub, glueUiBody };
 })();
