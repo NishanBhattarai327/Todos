@@ -3,9 +3,27 @@
 	padding: 0;
 	box-sizing: border-box;
 }
-
-.todo-list {
+ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
+}
+
+.content {
+	column-gap: 5px;
+	
+	display: flex;
+	column-gap: 10px;
+}
+
+.todos {
+	flex: 1;
+	order: 1;
+	background: #abcabc;
+}
+
+.projects {
+	order: 0;
+	flex: 0 0 content;
+	background: #defdef;
 }

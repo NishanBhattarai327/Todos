@@ -1,3 +1,10 @@
+/*.todo-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}*/
+
 .todo-item {
 	padding: 5px;
   

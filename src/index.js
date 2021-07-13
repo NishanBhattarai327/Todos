@@ -33,11 +33,12 @@ PubSub.subscribe(PubSub.eventCODE.ADD_TODO, current.addTodo);
 PubSub.subscribe(PubSub.eventCODE.UPDATE_TODO, current.updateTodo);
 PubSub.subscribe(PubSub.eventCODE.DELETE_TODO, current.deleteTodo);
 
-// ui_todo.gluePubSub(PubSub);
-// ui_todo.render();
-
 ui_project.gluePubSub(PubSub);
 ui_project.render();
+
+ui_todo.gluePubSub(PubSub);
+ui_todo.render();
+
 
 
 
