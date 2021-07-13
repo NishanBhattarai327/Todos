@@ -1,7 +1,7 @@
 import '../style/todoItem.css';
 
 const ui = (function() {
-	const domBody = document.querySelector('.content');
+	let domBody = document.querySelector('.content');
 	let PubSub;
 
 	function gluePubSub(pubSub) {
@@ -93,10 +93,10 @@ const ui = (function() {
 
 	function createForm(parent, data, type='Add Todo') {
 		const form = document.createElement('form');
-		form.classList.add('todo-edit-form');
+		form.classList.add('todo-form');
 		form.innerHTML = `
 			<label for='title'>Title</label>
-			<input type='text' name='title' id='title' class='field title' value='${data.title|| ''}' autofocus><br>
+			<input type='text' name='title' id='title' class='field title' value='${data.title|| ''}'><br>
 
 			<label for='description'>Description</label>
 			<textarea name='description' id='description' class='field description' rows="4" cols="50">${data.description || ''}</textarea>

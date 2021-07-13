@@ -209,7 +209,7 @@
 
 
 /********************form style start*************************************/
-.todo-edit-form {
+.todo-form {
   margin: 10px;
 }
 
@@ -232,7 +232,7 @@
   border-color: #000;
 }
 
-.todo-edit-form .btn {
+.todo-form .btn {
   width: 49.9%;
   background-color: #04AA6D;
   color: white;
@@ -244,16 +244,16 @@
   box-shadow:0 0 4px rgba(0,255,0,0.7);
   transition: .3s box-shadow;
 }
-.todo-edit-form .cancel {
+.todo-form .cancel {
   float: right;
   background-color: red;
   box-shadow:0 0 4px rgba(255,0,0,0.7);
 }
-.todo-edit-form .btn:hover {
+.todo-form .btn:hover {
   box-shadow:0 0 4px rgba(0,255,0,0.9);
   opacity: 1;
 }
-.todo-edit-form .cancel:hover {
+.todo-form .cancel:hover {
   box-shadow:0 0 4px rgba(255,0,0,0.9);
   opacity: 1;
 }
