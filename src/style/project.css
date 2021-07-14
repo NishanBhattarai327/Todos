@@ -1,3 +1,23 @@
+.project-body {
+	display: flex;
+	column-gap: 5px;
+}
+
+.todos {
+	flex: 1;
+	order: 1;
+	background: #abcabc;
+	padding: 50px 10px 0 50px;
+}
+
+.projects {
+	order: 0;
+	flex: 0 0 content;
+	background: #defdef;
+	padding: 5px;
+}
+
+
 .project-list {
 	margin-bottom: 40px;
 	display: flex;

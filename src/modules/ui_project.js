@@ -2,6 +2,7 @@ import '../style/project.css';
 
 const ui = (function() {
 	let domBody = document.querySelector('.content');
+	let domProjectsBody;
 	let PubSub;
 
 	function gluePubSub(pubSub) {
@@ -12,20 +13,28 @@ const ui = (function() {
 		domBody = body;
 	}
 
+	function getTodoBody() {
+		return domProjectsBody;
+	}
+
 	function render() {
 		clearDisplay();
 
 		let list = PubSub.emit(PubSub.eventCODE.GET_PROJECT_LIST);
-		let focusedProject = PubSub.emit(PubSub.eventCODE.GET_FOCUSED_PROJECT);
+		let focusedProjectId = PubSub.emit(PubSub.eventCODE.GET_FOCUSED_PROJECT);
+
+		domProjectsBody = document.createElement('div');
+		domProjectsBody.classList.add('project-body');
 
 		let domProjects = document.createElement('div');
 		domProjects.classList.add('projects');
+
 		
 		let domList = document.createElement('ul');
 		domList.classList.add('project-list');
 		list.forEach((data) => {
 			let projectView = createProject(data);
-			if(data.id === focusedProject) {
+			if(data.id === focusedProjectId) {
 				projectView.classList.add('focused-project');
 			}
 			domList.append(projectView);
@@ -38,11 +47,14 @@ const ui = (function() {
 
 		domProjects.append(domList);
 		domProjects.append(domAddBtn);
-		domBody.append(domProjects);
+		domProjectsBody.append(domProjects);
+		domBody.append(domProjectsBody);
+
+		PubSub.emit(PubSub.eventCODE.RENDERED_TODOS);
 	}
 
 	function clearDisplay() {
-		let display = document.querySelector('.projects');
+		let display = document.querySelector('.project-body');
 		if(display) {
 			domBody.removeChild(display);
 		}
@@ -181,7 +193,7 @@ const ui = (function() {
 		render();
 	}
 
-	return { render, gluePubSub, glueUiBody };
+	return { render, gluePubSub, glueUiBody, getTodoBody };
 })();
 
 export { ui };

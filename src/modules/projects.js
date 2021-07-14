@@ -1,8 +1,15 @@
 const projects = (function() {
 	let list = [];
 	let focusedProjectId = 0;
+	let PubSub;
+
+	function gluePubSub(pubSub) {
+		PubSub = pubSub;
+	}
 
 	function getFocusedProject() {
+		let todoList = list[getIndex(focusedProjectId)].todoList;
+		PubSub.emit(PubSub.eventCODE.SET_TODO_LIST, todoList);
 		return focusedProjectId;
 	}
 
@@ -10,12 +17,15 @@ const projects = (function() {
 		focusedProjectId = id;
 	}
 
-	function getTodoList(id) {
+	function getTodoList(id=focusedProjectId) {
 		let index = getIndex(id);
-		return list[index].todoList;
+		if(list[index].todoList) {
+			return list[index].todoList;
+		}
+		return ;
 	}
 
-	function addTodoList(id, todoList) {
+	function addTodoList(todoList, id) {
 		let index = getIndex(id);
 		list[index] = Object.assign(list[index], { todoList });
 	}
@@ -24,7 +34,7 @@ const projects = (function() {
 		return list;
 	}
 
-	function getProject(id=0) {
+	function getProject(id=focusedProjectId) {
 		return list[getIndex(id)];
 	}
 
@@ -54,6 +64,7 @@ const projects = (function() {
 
 
 	return { 
+		gluePubSub,
 		getProjectList, getProject, addProject, updateProject, deleteProject, 
 		getTodoList, addTodoList,
 		getFocusedProject, changeFocusToProjectOfId

@@ -17,14 +17,19 @@ const ui = (function() {
 
 		let list = PubSub.emit(PubSub.eventCODE.GET_TODO_LIST);
 
+		domBody = PubSub.emit(PubSub.eventCODE.GET_TODOS_PARENT_DOM);
+
 		let domTodos = document.createElement('div');
 		domTodos.classList.add('todos');
 		
 		let domList = document.createElement('ul');
 		domList.classList.add('todo-list');
-		list.forEach((todoData) => {
-			domList.append(createTodo(todoData));
-		});
+
+		if(list !== undefined) {
+			list.forEach((todoData) => {
+				domList.append(createTodo(todoData));
+			});
+		}
 
 		let domAddBtn = document.createElement('button');
 		domAddBtn.classList.add('todo-add-btn', 'todo-btn');

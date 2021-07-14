@@ -5,6 +5,10 @@ const todos = (function() {
 		return list;
 	}
 
+	function setTodoList(newList) {
+		list = newList;
+	}
+
 	function getTodoItem(id) {
 		return list[getIndex(id)];
 	}
@@ -35,12 +39,8 @@ const todos = (function() {
 		return index;
 	}
 
-	return { getTodoList, getTodoItem, addTodo, deleteTodo, updateTodo };
+	return { getTodoList, setTodoList, getTodoItem, addTodo, deleteTodo, updateTodo };
 
 })();
 
-const newTodos = () => {
-	return todos;
-}
-
-export { todos, newTodos };
+export { todos };
