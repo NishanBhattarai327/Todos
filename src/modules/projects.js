@@ -8,12 +8,14 @@ const projects = (function() {
 	}
 
 	function getFocusedProject() {
-		let todoList = list[getIndex(focusedProjectId)].todoList;
+		let todoList = list[getIndex(focusedProjectId)].todoList || [];
 		PubSub.emit(PubSub.eventCODE.SET_TODO_LIST, todoList);
 		return focusedProjectId;
 	}
 
 	function changeFocusToProjectOfId(id) {
+		let todoList = PubSub.emit(PubSub.eventCODE.GET_TODO_LIST);
+		addTodoList(todoList, focusedProjectId);
 		focusedProjectId = id;
 	}
 
