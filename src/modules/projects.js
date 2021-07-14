@@ -8,12 +8,16 @@ const projects = (function() {
 	}
 
 	function getFocusedProject() {
-		let todoList = list[getIndex(focusedProjectId)].todoList || [];
-		PubSub.emit(PubSub.eventCODE.SET_TODO_LIST, todoList);
-		return focusedProjectId;
+		if (focusedProjectId !== undefined) {
+			let index = getIndex(focusedProjectId);
+			let todoList = list[index].todoList || [];
+			PubSub.emit(PubSub.eventCODE.SET_TODO_LIST, todoList);
+			return focusedProjectId;
+		}
 	}
 
 	function changeFocusToProjectOfId(id) {
+		console.log('id for changeFocusToProjectOfId ' + id);
 		let todoList = PubSub.emit(PubSub.eventCODE.GET_TODO_LIST);
 		addTodoList(todoList, focusedProjectId);
 		focusedProjectId = id;
@@ -52,9 +56,14 @@ const projects = (function() {
 	}
 
 	function deleteProject(id) {
-		return list.splice(getIndex(id), 1).length !== 0 ? true : false;
-	}
+		list.splice(getIndex(id), 1);
 
+		//if focused project is deleted the
+		if (id === focusedProjectId) {
+			//set focus to the first list element;
+			focusedProjectId = list[0] ? list[0].id : undefined;
+		}
+	}
 
 	function getIndex(id) {
 		let index;

@@ -63,13 +63,14 @@ const ui = (function() {
 	function createProject(data) {
 		let domProject = document.createElement('li');
 		domProject.classList.add('project');
-		domProject.addEventListener('click', (e) => handleFocusedProject(e.target, data));
 
 		let removeBtn = document.createElement('button');
 		let editBtn = document.createElement('button');
 		let domInfo = document.createElement('span');
+		
 		domInfo.classList.add('project-info');
 		domInfo.innerHTML = data.title;
+		domInfo.addEventListener('click', (e) => handleFocusedProject(e.target, data));
 
 		removeBtn.classList.add('btn', 'remove-btn', 'left');
 		editBtn.classList.add('btn', 'edit-btn');

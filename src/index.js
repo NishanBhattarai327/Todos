@@ -10,7 +10,7 @@ todos.addTodo({title: 'Washing Cloth', description: 'school dress', dueDate: '20
 todos.addTodo({title: 'Washing Cloth', description: 'school dress', dueDate: '2018-07-22', priority: 'high'});
 
 projects.gluePubSub(PubSub);
-projects.addProject({title:'Basic 0'});
+projects.addProject({title:'Today'});
 projects.addProject({title:'Basic 1'});
 projects.addProject({title:'Basic 2'});
 projects.addProject({title:'Basic 3'});
@@ -26,7 +26,6 @@ PubSub.subscribe(PubSub.eventCODE.DELETE_PROJECT,                projects.delete
 PubSub.subscribe(PubSub.eventCODE.GET_FOCUSED_PROJECT,           projects.getFocusedProject);
 PubSub.subscribe(PubSub.eventCODE.CHANGE_FOCUS_TO_PROJECT_OF_ID, projects.changeFocusToProjectOfId);
 
-console.log(todos.getTodoList());
 PubSub.subscribe(PubSub.eventCODE.GET_TODO_LIST, todos.getTodoList);
 PubSub.subscribe(PubSub.eventCODE.SET_TODO_LIST, todos.setTodoList);
 PubSub.subscribe(PubSub.eventCODE.ADD_TODO,      todos.addTodo);
