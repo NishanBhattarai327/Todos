@@ -21,6 +21,8 @@ const projects = (function() {
 	}
 
 	function changeFocusToProjectOfId(id) {
+		/*When project is clicked first add todo list to that project and change the focusedProjectId to 
+		clicked project id*/
 		let todoList = PubSub.emit(PubSub.eventCODE.GET_TODO_LIST);
 		addTodoList(todoList, focusedProjectId);
 		focusedProjectId = id;
@@ -51,6 +53,11 @@ const projects = (function() {
 	function addProject(input) {
 		let title = input.title || 'Untitled', focus = input.focus || false;
 		let id = list.length;
+
+		/*If the project is the first project than set focus to the project*/
+		if (list.length === 0) {
+			focusedProjectId = id;
+		}
 		list.push({title, focus, id});
 	}
 
