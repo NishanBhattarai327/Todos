@@ -69,7 +69,7 @@ const ui = (function() {
 		domBtnEditTodo.textContent = 'Edit';
 
 		domBtnTodoStatus.addEventListener('click', (e) => handleStatusClicked(e.target, todoData));
-		domBtnRemoveTodo.addEventListener('click', (e) => handleRemoveClicked(e.target, todoData.id));
+		domBtnRemoveTodo.addEventListener('click', (e) => handleRemoveClicked(e.target, todoData));
 		domBtnEditTodo.addEventListener('click', (e) => handleEditClicked(e.target, todoData));
 
 		let domTodoContent = document.createElement('div');
