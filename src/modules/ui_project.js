@@ -32,6 +32,7 @@ const ui = (function() {
 
 		let domProjects = document.createElement('div');
 		domProjects.classList.add('projects');
+		domProjects.append(headerTag('Projects'));
 
 		
 		let domList = document.createElement('ul');
@@ -196,6 +197,12 @@ const ui = (function() {
 			PubSub.eventCODE.UPDATE_PROJECT, id, newData
 		);
 		render();
+	}
+
+	function headerTag(content) {
+		let header = document.createElement('header');
+		header.innerHTML = content;
+		return header;
 	}
 
 	return { render, gluePubSub, glueUiBody, getTodoBody };

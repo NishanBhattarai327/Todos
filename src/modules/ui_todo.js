@@ -25,6 +25,7 @@ const ui = (function() {
 
 		let domTodos = document.createElement('div');
 		domTodos.classList.add('todos');
+		domTodos.append(headerTag('Todos'))
 		
 		let domList = document.createElement('ul');
 		domList.classList.add('todo-list');
@@ -239,6 +240,12 @@ const ui = (function() {
 			PubSub.eventCODE.UPDATE_TODO, id, newData
 		);
 		render();
+	}
+
+	function headerTag(content) {
+		let header = document.createElement('header');
+		header.innerHTML = content;
+		return header;
 	}
 
 
