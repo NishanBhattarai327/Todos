@@ -69,11 +69,12 @@ const projects = (function() {
 	function deleteProject(id) {
 		let index = getIndex(id);
 		list.splice(index, 1);
+		console.log(index)
 
 		//if focused project is deleted the
 		if (id === focusedProjectId) {
-			//set focus to the first list element;
-			focusedProjectId = list[0] ? list[0].id : undefined;
+			//set focus the project nether down or up of it
+			focusedProjectId = list[index]?list[index].id:list[index-1]?list[index-1].id:undefined;
 		}
 	}
 

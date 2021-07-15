@@ -38,6 +38,12 @@ projects.addTodoList([
 projects.addProject({title:'Weekly'});
 projects.addProject({title:'Monthly'});
 projects.addProject({title:'Work List'});
+projects.addProject({title:'Work List 1'});
+projects.addProject({title:'Work List 2'});
+projects.addProject({title:'Work List 3'});
+projects.addProject({title:'Work List 4'});
+projects.addProject({title:'Work List 5'});
+projects.addProject({title:'Work List 6'});
 
 PubSub.subscribe(PubSub.eventCODE.GET_PROJECT_LIST,              projects.getProjectList);
 PubSub.subscribe(PubSub.eventCODE.ADD_PROJECT,                   projects.addProject);
