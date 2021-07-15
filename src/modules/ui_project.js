@@ -1,3 +1,7 @@
+/**
+ * This modules handles the view and user interaction of projects
+ * */
+
 import '../style/project.css';
 
 const ui = (function() {
@@ -67,7 +71,7 @@ const ui = (function() {
 		let removeBtn = document.createElement('button');
 		let editBtn = document.createElement('button');
 		let domInfo = document.createElement('span');
-		
+
 		domInfo.classList.add('project-info');
 		domInfo.innerHTML = data.title;
 		domInfo.addEventListener('click', (e) => handleFocusedProject(e.target, data));

@@ -1,3 +1,7 @@
+/**
+ * This modules act as mediator for communication between different modules
+ * */
+
 const PubSub = (() => {
 	let events = {};
 

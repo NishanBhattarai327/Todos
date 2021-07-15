@@ -1,7 +1,11 @@
+/**
+ * This module handles and manupulates projects data
+ * */
+
 const projects = (function() {
-	let list = [];
-	let focusedProjectId = 0;
-	let PubSub;
+	let list = []; /*Project list*/
+	let focusedProjectId = 0; /*Id of the project that is clicked*/
+	let PubSub; /*Mediator module*/
 
 	function gluePubSub(pubSub) {
 		PubSub = pubSub;
@@ -17,7 +21,6 @@ const projects = (function() {
 	}
 
 	function changeFocusToProjectOfId(id) {
-		console.log('id for changeFocusToProjectOfId ' + id);
 		let todoList = PubSub.emit(PubSub.eventCODE.GET_TODO_LIST);
 		addTodoList(todoList, focusedProjectId);
 		focusedProjectId = id;
@@ -33,7 +36,8 @@ const projects = (function() {
 
 	function addTodoList(todoList, id) {
 		let index = getIndex(id);
-		list[index] = Object.assign(list[index], { todoList });
+		let previousList = list[index] || {};
+		list[index] = Object.assign(previousList, { todoList });
 	}
 
 	function getProjectList() {
@@ -56,7 +60,8 @@ const projects = (function() {
 	}
 
 	function deleteProject(id) {
-		list.splice(getIndex(id), 1);
+		let index = getIndex(id);
+		list.splice(index, 1);
 
 		//if focused project is deleted the
 		if (id === focusedProjectId) {

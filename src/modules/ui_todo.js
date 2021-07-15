@@ -1,3 +1,7 @@
+/**
+ * This module handles the view and user interaction of todos
+ * */
+
 import '../style/todo.css';
 
 const ui = (function() {

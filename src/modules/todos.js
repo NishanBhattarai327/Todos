@@ -1,3 +1,7 @@
+/**
+ * This module handles and manupulate the todos data
+ * */
+
 const todos = (function() {
 	let list = [];
 
