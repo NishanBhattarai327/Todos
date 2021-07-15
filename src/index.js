@@ -51,16 +51,31 @@ projects.addTodoList([
 	todos.addTodo({title: 'Study', description: 'acadamic study', dueDate: '2018-07-22', priority: 'high'}),
 	todos.addTodo({title: 'Evening Walk', description: '5 km', dueDate: '2018-07-22', priority: 'high'})
 ], 0);
-projects.addProject({title:'Weekly'});
-projects.addProject({title:'Monthly'});
-projects.addProject({title:'Work List'});
-projects.addProject({title:'Work List 1'});
-projects.addProject({title:'Work List 2'});
-projects.addProject({title:'Work List 3'});
-projects.addProject({title:'Work List 4'});
-projects.addProject({title:'Work List 5'});
-projects.addProject({title:'Work List 6'});
+/*set todos module todo list to empty list*/
+todos.setTodoList([]);
 
+projects.addProject({title:'Weekly'});
+projects.addTodoList([
+    todos.addTodo({title: 'Complete 50% of physic notes', dueDate: '2018-07-22', priority: 'high'}),
+    todos.addTodo({title: 'Complete the todos project', dueDate: '2018-07-22', priority: 'high'}),
+    todos.addTodo({title: 'Plant 10 trees', dueDate: '2018-07-22', priority: 'high'})
+], 1);
+/*set todos module todo list to empty list*/
+todos.setTodoList([]);
+
+projects.addProject({title:'Monthly'});
+projects.addTodoList([
+    todos.addTodo({title: '1000 mins of Meditation', description: 'daily 30 min', dueDate: '2018-07-22', priority: 'high'}),
+    todos.addTodo({title: 'Complete physic and Chemistry notes', description: 'acadamic study', dueDate: '2018-07-22', priority: 'high'}),
+    todos.addTodo({title: 'Plant 45 trees', description: 'weekly 10-12 trees', dueDate: '2018-07-22', priority: 'high'})
+], 2);
+/*set todos module todo list to empty list*/
+todos.setTodoList([]);
+
+projects.addProject({title:'House work'});
+projects.addTodoList([
+    todos.addTodo({title: 'Cook rice', dueDate: '2018-07-22', priority: 'high'})
+], 3);
 /*set todos module todo list to empty list*/
 todos.setTodoList([]);
 
