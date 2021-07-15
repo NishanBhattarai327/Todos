@@ -13,6 +13,8 @@ const projects = (function() {
 
 	function getFocusedProject() {
 		if (focusedProjectId !== undefined) {
+			/*While changing the focus also change the todo list of todos module 
+			to the todolist of current project*/
 			let index = getIndex(focusedProjectId);
 			let todoList = list[index].todoList || [];
 			PubSub.emit(PubSub.eventCODE.SET_TODO_LIST, todoList);
@@ -21,8 +23,8 @@ const projects = (function() {
 	}
 
 	function changeFocusToProjectOfId(id) {
-		/*When project is clicked first add todo list to that project and change the focusedProjectId to 
-		clicked project id*/
+		/*When project is clicked first add todo list to that project and change the 
+		focusedProjectId to clicked project id*/
 		let todoList = PubSub.emit(PubSub.eventCODE.GET_TODO_LIST);
 		addTodoList(todoList, focusedProjectId);
 		focusedProjectId = id;
@@ -56,7 +58,7 @@ const projects = (function() {
 
 		/*If the project is the first project than set focus to the project*/
 		if (list.length === 0) {
-			focusedProjectId = id;
+			changeFocusToProjectOfId(id);
 		}
 		list.push({title, focus, id});
 	}
@@ -69,7 +71,6 @@ const projects = (function() {
 	function deleteProject(id) {
 		let index = getIndex(id);
 		list.splice(index, 1);
-		console.log(index)
 
 		//if focused project is deleted the
 		if (id === focusedProjectId) {

@@ -24,6 +24,7 @@ const todos = (function() {
 		let id = list.length;
 
 		list.push({title, description, dueDate, priority, completed, id});
+		return list[list.length-1];
 	}
 
 	function deleteTodo(id) {
