@@ -75,9 +75,9 @@ const ui = (function() {
 
 		let domTodoContent = document.createElement('div');
 		domTodoContent.setAttribute('id', `id-${todoData.id}`);
-		domTodoContent.classList.add('todo-item-content');
+		domTodoContent.classList.add('todo-content');
 		domTodoContent.innerHTML = todoHtml(todoData);
-		domTodoContent.addEventListener('click', (e) => handleTodoContentClicked(e.target, todoData));
+		domTodoContent.addEventListener('click', () => handleTodoContentClicked(todoData));
 
 		domTodoItem.append(domBtnTodoStatus);
 		domTodoItem.append(domTodoContent);
@@ -209,10 +209,17 @@ const ui = (function() {
 		render();
 	}
 
-	function handleTodoContentClicked(content, todoData) {
+	function handleTodoContentClicked(todoData) {
 		let popup = popupWindow(domBody);
-
-
+		let content = document.createElement('div');
+		content.classList.add('todo-content-popup');
+		content.innerHTML = `
+			<div> Title : ${todoData.title}</div>
+			<div> Description : ${todoData.description}</div>
+			<div> Priority : ${todoData.priority}</div>
+			<div> Due Date : ${todoData.dueDate}</div>
+		`;
+		popup.append(content);
 	}
 
 	function handleEditClicked(btn, todoData) {
