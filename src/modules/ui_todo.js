@@ -77,6 +77,7 @@ const ui = (function() {
 		domTodoContent.setAttribute('id', `id-${todoData.id}`);
 		domTodoContent.classList.add('todo-item-content');
 		domTodoContent.innerHTML = todoHtml(todoData);
+		domTodoContent.addEventListener('click', (e) => handleTodoContentClicked(e.target, todoData));
 
 		domTodoItem.append(domBtnTodoStatus);
 		domTodoItem.append(domTodoContent);
@@ -95,9 +96,9 @@ const ui = (function() {
 		}
 		return `
 			<span class='todo-title status-${status}-text'>${todoData.title}</span> 
-			<span class='todo-description status-${status}-text'>${todoData.description}</span>
-			<span class='todo-priority status-${status}-text'>priority: ${todoData.priority}</span>
-			<span class='todo-due-date status-${status}-text'>due-date: ${todoData.dueDate}</span>
+			<span class='todo-priority status-${status}-text priority-${todoData.priority}'>
+			${todoData.priority}</span>
+			<span class='todo-due-date status-${status}-text'>${todoData.dueDate}</span>
 		`;
 	}
 
@@ -128,7 +129,7 @@ const ui = (function() {
 		form.querySelector('#priority').value = data.priority || 'low';
 
 		let popup = popupWindow(parent);
-		popup.querySelector('.pop-up-content').append(form);
+		popup.append(form);
 
 		const btnCancel = document.createElement('button');
 		btnCancel.textContent = 'cancel';
@@ -172,7 +173,7 @@ const ui = (function() {
 		  }
 		});
 
-		return popup;
+		return content;
 	}
 
 	function removePopup(parent=domBody) {
@@ -206,6 +207,12 @@ const ui = (function() {
 
 		PubSub.emit(PubSub.eventCODE.UPDATE_TODO, todoData.id, {completed});
 		render();
+	}
+
+	function handleTodoContentClicked(content, todoData) {
+		let popup = popupWindow(domBody);
+
+
 	}
 
 	function handleEditClicked(btn, todoData) {
