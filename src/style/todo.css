@@ -67,6 +67,10 @@
 /************ Todo content poped up ********************/
 .todo-content-popup {
   padding: 30px 20px;
+  font-weight: 500;
+}
+.todo-content-popup div {
+  margin-bottom: 10px;
 }
 /***************** End of todo content popup *****************/
 

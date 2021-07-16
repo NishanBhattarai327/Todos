@@ -47,7 +47,7 @@ PubSub.subscribe(PubSub.eventCODE.RENDERED_TODOS, ui_todo.render);
 /*Initial project and work todos*/
 projects.addProject({title:'Daily'});
 projects.addTodoList([
-	todos.addTodo({title: 'Meditation', description: '30 min', dueDate: '2018-07-22', priority: 'high'}),
+	todos.addTodo({title: 'Meditate', description: '30 min', dueDate: '2018-07-22', priority: 'high'}),
 	todos.addTodo({title: 'Study', description: 'acadamic study', dueDate: '2018-07-22', priority: 'high'}),
 	todos.addTodo({title: 'Evening Walk', description: '5 km', dueDate: '2018-07-22', priority: 'high'})
 ], 0);
@@ -72,7 +72,7 @@ projects.addTodoList([
 /*set todos module todo list to empty list*/
 todos.setTodoList([]);
 
-projects.addProject({title:'House work'});
+projects.addProject({title:'Today work'});
 projects.addTodoList([
     todos.addTodo({title: 'Cook rice', dueDate: '2018-07-22', priority: 'high'})
 ], 3);

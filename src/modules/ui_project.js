@@ -33,7 +33,7 @@ const ui = (function() {
 
 		let domProjects = document.createElement('div');
 		domProjects.classList.add('projects');
-		domProjects.append(headerTag('Projects'));
+		domProjects.append(headerTag('Work Type'));
 
 		
 		let domList = document.createElement('ul');

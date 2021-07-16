@@ -46,6 +46,7 @@
 	justify-content: space-between;
 	align-items: baseline;
 	column-gap: 5px;
+	border-bottom: 2px solid black;
 }
 
 .left {
