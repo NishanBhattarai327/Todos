@@ -26,6 +26,7 @@ const ui = (function() {
 
 		let list = PubSub.emit(PubSub.eventCODE.GET_PROJECT_LIST);
 		let focusedProjectId = PubSub.emit(PubSub.eventCODE.GET_FOCUSED_PROJECT);
+		let focusedProjectTitle;
 
 		domProjectsBody = document.createElement('div');
 		domProjectsBody.classList.add('project-body');
@@ -40,6 +41,7 @@ const ui = (function() {
 		list.forEach((data) => {
 			let projectView = createProject(data);
 			if(data.id === focusedProjectId) {
+				focusedProjectTitle = data.title;
 				projectView.classList.add('focused-project');
 			}
 			domList.append(projectView);
@@ -55,7 +57,7 @@ const ui = (function() {
 		domProjectsBody.append(domProjects);
 		domBody.append(domProjectsBody);
 
-		PubSub.emit(PubSub.eventCODE.RENDERED_TODOS);
+		PubSub.emit(PubSub.eventCODE.RENDERED_TODOS, focusedProjectTitle);
 	}
 
 	function clearDisplay() {

@@ -16,7 +16,7 @@ const ui = (function() {
 		domBody = body;
 	}
 
-	function render() {
+	function render(header='Todos') {
 		clearDisplay();
 
 		let list = PubSub.emit(PubSub.eventCODE.GET_TODO_LIST);
@@ -25,7 +25,7 @@ const ui = (function() {
 
 		let domTodos = document.createElement('div');
 		domTodos.classList.add('todos');
-		domTodos.append(headerTag('Todos'))
+		domTodos.append(headerTag(header))
 		
 		let domList = document.createElement('ul');
 		domList.classList.add('todo-list');
