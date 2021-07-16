@@ -36,10 +36,12 @@
 	position: relative;
 	background: #abcabc;
 	left: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
 }
 
 .project {
-	padding: 5px 0;
+	padding: 5px 5px;
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
